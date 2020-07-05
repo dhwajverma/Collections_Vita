@@ -1,18 +1,19 @@
 package com.dhwaj.utils.map;
 
+import java.util.Objects;
+
 public class Node<T, E> {
 
 	T key;
 	E value;
-	int hashCode;
+	int hash;
 	Node<?, ?> next;
-	
-	public Node(T key, E value, int hashCode, Node<?, ?> next)
-	{
-		this.key=key;
-		this.value=value;
-		this.hashCode=hashCode;
-		this.next=next;
+
+	public Node(T key, E value, int hashCode, Node<?, ?> next) {
+		this.key = key;
+		this.value = value;
+		this.hash = hashCode;
+		this.next = next;
 	}
 
 	public T getKey() {
@@ -31,12 +32,12 @@ public class Node<T, E> {
 		this.value = value;
 	}
 
-	public int getHashCode() {
-		return hashCode;
+	public int getHash() {
+		return hash;
 	}
 
-	public void setHashCode(int hashCode) {
-		this.hashCode = hashCode;
+	public void setHash(int hashCode) {
+		this.hash = hashCode;
 	}
 
 	public Node<?, ?> getNext() {
@@ -46,8 +47,21 @@ public class Node<T, E> {
 	public void setNext(Node<?, ?> next) {
 		this.next = next;
 	}
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		return (Objects.hash(key) * Objects.hash(value));
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		Node<?, ?> n = (Node<?, ?>) o;
+		if (Objects.equals(key, n.getKey()) && Objects.equals(value, n.getValue()))
+			return true;
+		return false;
+
+	}
 
 }
