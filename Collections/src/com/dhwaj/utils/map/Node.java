@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Node<T, E> {
 
-	T key;
-	E value;
-	int hash;
-	Node<?, ?> next;
+	private T key;
+	private E value;
+	private int hash;
+	private Node<?, ?> next;
 
 	public Node(T key, E value, int hashCode, Node<?, ?> next) {
 		this.key = key;
@@ -62,6 +62,11 @@ public class Node<T, E> {
 			return true;
 		return false;
 
+	}
+
+	@Override
+	public String toString() {
+		return "Node [key=" + key + ", value=" + value + ", hash=" + hash + ", next=" + next + "]";
 	}
 
 }
