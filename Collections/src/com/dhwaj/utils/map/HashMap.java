@@ -42,13 +42,20 @@ public class HashMap<T, E> implements Map<T, E> {
 	}
 
 	@Override
-	public boolean containKey(T key) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean containsKey(T key) {
+		int hash = hashCode(key);
+		int index = hash % length;
+		Node<T, E> head = (Node<T, E>) arr[index];
+		E value = findValueFromList(head, key, hash);
+		if (value == null)
+			return false;
+		else
+			return true;
+
 	}
 
 	@Override
-	public boolean containsKey(E key) {
+	public boolean containsValue(E value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -59,24 +66,40 @@ public class HashMap<T, E> implements Map<T, E> {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] != null) {
+				Node<T, E> head = (Node<T, E>) arr[i];
+				while (head.getNext() != null) {
+					sb.append(" " + head.toString());
+					head = (Node<T, E>) head.getNext();
+				}
+				sb.append("" + head.toString());
+			}
+		}
+		return sb.toString();
+	}
+
 	private int hashCode(T key) {
 		return Math.abs((Objects.hash(key) * Objects.hash(key)));
 	}
 
 	private E findValueFromList(Node<T, E> head, T key, int hash) {
-		E value=null;
+		E value = null;
 		if (head.getNext() == null && head.getHash() == hash && head.getKey() == key)
-			value=head.getValue();
+			value = head.getValue();
 		else {
 			while (head.getNext() != null) {
 				if (head.getHash() == hash && head.getKey() == key) {
-					value=head.getValue();
+					value = head.getValue();
 					break;
 				}
-				head=(Node<T, E>) head.getNext();
+				head = (Node<T, E>) head.getNext();
 			}
-			if (value == null && head.getHash() == hash && head.getKey() == key) 
-				value=head.getValue();
+			if (value == null && head.getHash() == hash && head.getKey() == key)
+				value = head.getValue();
 		}
 		return value;
 	}

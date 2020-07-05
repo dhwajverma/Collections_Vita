@@ -8,9 +8,10 @@ public interface Map<T, E> {
 
 	public E Remove(T key);
 
-	public boolean containKey(T key);
+	public boolean containsKey(T key);
 
-	public boolean containsKey(E key);
+	public boolean containsValue(E value);
 
 	public Integer size();
+	
 }

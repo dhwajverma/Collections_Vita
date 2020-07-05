@@ -66,7 +66,7 @@ public class Node<T, E> {
 
 	@Override
 	public String toString() {
-		return "Node [key=" + key + ", value=" + value + ", hash=" + hash + ", next=" + next + "]";
+		return "[key=" + key + ", value=" + value + "]";
 	}
 
 }
