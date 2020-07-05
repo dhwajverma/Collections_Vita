@@ -60,7 +60,7 @@ public class HashMap<T, E> implements Map<T, E> {
 	}
 
 	private int hashCode(T key) {
-		return (Objects.hash(key) * Objects.hash(key));
+		return Math.abs((Objects.hash(key) * Objects.hash(key)));
 	}
 
 	private E findValueFromList(Node<T, E> head, T key, int hash) {
